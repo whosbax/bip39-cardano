@@ -1,4 +1,3 @@
-lucid
 # Logs
 logs
 *.log
@@ -130,4 +129,3 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .DS_Store
-lucid/
