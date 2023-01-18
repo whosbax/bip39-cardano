@@ -1,4 +1,5 @@
 # Logs
+!lucid/dist
 logs
 *.log
 npm-debug.log*
