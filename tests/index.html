@@ -20,8 +20,12 @@
 		<p id="address"></p>
 		<p id="address2"></p>
 		<p id="mnemonic"></p>
-		<div id="subwallet_form"> </div>
-		<div id="sub_qrcode"> </div>
+
+		<div id="subwallet_form_main"> 
+			<div id="subwallet_form"></div>
+			<div id="sub_qrcode"> </div>
+		</div>
+		
 	</div>
 </main>
 
@@ -32,6 +36,8 @@
 	let subwallet = document.getElementById("subwallet_form");
 	generatebutton.onclick = async function() {
     document.getElementById("disclaimer").innerHTML = "";
+    document.getElementById("subwallet_form").innerHTML = "";
+    document.getElementById("sub_qrcode").innerHTML = "";
 	subwallet.innerHTML = "";
 
     
@@ -65,7 +71,6 @@
 	subwallet_buttton_entreprise.innerHTML='generate an entreprise wallet';
 	subwallet_buttton_entreprise.onclick = async function(){
 		this.accountIndex++;
-		console.log("ok");
 		let lucid = await Lucid.new();
 		let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Entreprise", accountIndex: this.accountIndex }).wallet;	
 		let div_qr = document.createElement('div');
