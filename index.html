@@ -30,7 +30,6 @@
 </main>
 
 <script type="module">
-
 	import { Lucid } from "./lucid/dist/web/mod.js"
 	let generatebutton = document.getElementById("generatebutton");
 	let subwallet = document.getElementById("subwallet_form");
@@ -60,10 +59,10 @@
 		let lucid = await Lucid.new();
 		let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Base", accountIndex: parseInt(this.getAttribute('accountIndex')) }).wallet;	
 		let div_qr = document.createElement('div');
-		div_qr.setAttribute('id', "base_qr_"+this.accountIndex);		
+		div_qr.setAttribute('id', "Base_qr_"+this.getAttribute('accountIndex'));		
 		document.getElementById('sub_qrcode').appendChild(div_qr);
 		console.log( await wallet.address());
-		new QRCode(div_qr.id, await wallet.address());			
+		new QRCode(div_qr.getAttribute('id'), await wallet.address());			
 	}
 
 	//sub wallet entreprise generation
@@ -75,10 +74,10 @@
 		let lucid = await Lucid.new();
 		let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Entreprise", accountIndex: parseInt(this.getAttribute('accountIndex')) }).wallet;	
 		let div_qr = document.createElement('div');
-		div_qr.setAttribute('id', "entreprise_qr_"+this.accountIndex);		
+		div_qr.setAttribute('id', "Entreprise_qr_"+this.getAttribute('accountIndex'));			
 		document.getElementById('sub_qrcode').appendChild(div_qr);
 		console.log(await wallet.address());
-		new QRCode(div_qr.id, await wallet.address());	
+		new QRCode(div_qr.getAttribute('id'), await wallet.address());	
 	}	
 	
 	subwallet.appendChild(subwallet_buttton);
