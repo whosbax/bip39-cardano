@@ -56,12 +56,13 @@
 	subwallet_buttton.innerHTML='generate a derivated wallet';
 	subwallet_buttton.setAttribute('accountIndex', 0);
 	subwallet_buttton.onclick = async function(){
-		this.base_accountIndex++;
+		this.setAttribute('accountIndex', parseInt(this.getAttribute('accountIndex')) + 1);
 		let lucid = await Lucid.new();
-		let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Entreprise", accountIndex: this.accountIndex }).wallet;	
+		let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Base", accountIndex: parseInt(this.getAttribute('accountIndex')) }).wallet;	
 		let div_qr = document.createElement('div');
 		div_qr.setAttribute('id', "base_qr_"+this.accountIndex);		
 		document.getElementById('sub_qrcode').appendChild(div_qr);
+		console.log( await wallet.address());
 		new QRCode(div_qr.id, await wallet.address());			
 	}
 
@@ -69,13 +70,14 @@
 	let subwallet_buttton_entreprise = document.createElement('button');
 	subwallet_buttton_entreprise.setAttribute('accountIndex', 0);
 	subwallet_buttton_entreprise.innerHTML='generate an entreprise wallet';
-	subwallet_buttton_entreprise.onclick = async function(){
-		this.accountIndex++;
+	subwallet_buttton_entreprise.onclick = async function(){		
+		this.setAttribute('accountIndex', parseInt(this.getAttribute('accountIndex')) + 1);
 		let lucid = await Lucid.new();
-		let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Entreprise", accountIndex: this.accountIndex }).wallet;	
+		let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Entreprise", accountIndex: parseInt(this.getAttribute('accountIndex')) }).wallet;	
 		let div_qr = document.createElement('div');
 		div_qr.setAttribute('id', "entreprise_qr_"+this.accountIndex);		
 		document.getElementById('sub_qrcode').appendChild(div_qr);
+		console.log(await wallet.address());
 		new QRCode(div_qr.id, await wallet.address());	
 	}	
 	
