@@ -6,10 +6,23 @@
 <main>
 	<div>
 		<div id="form">
+                    <input type="checkbox" id="chck1">
+                    <label class="tab-label" for="chck1">Advanced options</label>
+                    <div id="advancedoptions" >    
+		        <label for="numberofaccounts">Number of account(s):</label>
+                        <input type="number" id="numberofaccounts" name="numberofaccounts" min="1" max="100000" value="1"/><br />
+                        <label for="numberofenterprisesaccounts">Number of Enterprise account(s):</label>
+                        <input type="number" id="numberofenterprisesaccounts" name="numberofenterprisesaccounts" min="1" max="100000"/><br />
+                        <label for="externalstakekey">External Stakekey :</label>
+                        <input type="text" id="externalstakekey" name="externalstakekey" />
+                    </div>
 			<button id="generatebutton"><b>generate a new wallet</b></button>
 			<p id="links"><a href="#"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMiAwIDUuMzAyIDMuNDM4IDkuOCA4LjIwNyAxMS4zODcuNTk5LjExMS43OTMtLjI2MS43OTMtLjU3N3YtMi4yMzRjLTMuMzM4LjcyNi00LjAzMy0xLjQxNi00LjAzMy0xLjQxNi0uNTQ2LTEuMzg3LTEuMzMzLTEuNzU2LTEuMzMzLTEuNzU2LTEuMDg5LS43NDUuMDgzLS43MjkuMDgzLS43MjkgMS4yMDUuMDg0IDEuODM5IDEuMjM3IDEuODM5IDEuMjM3IDEuMDcgMS44MzQgMi44MDcgMS4zMDQgMy40OTIuOTk3LjEwNy0uNzc1LjQxOC0xLjMwNS43NjItMS42MDQtMi42NjUtLjMwNS01LjQ2Ny0xLjMzNC01LjQ2Ny01LjkzMSAwLTEuMzExLjQ2OS0yLjM4MSAxLjIzNi0zLjIyMS0uMTI0LS4zMDMtLjUzNS0xLjUyNC4xMTctMy4xNzYgMCAwIDEuMDA4LS4zMjIgMy4zMDEgMS4yMy45NTctLjI2NiAxLjk4My0uMzk5IDMuMDAzLS40MDQgMS4wMi4wMDUgMi4wNDcuMTM4IDMuMDA2LjQwNCAyLjI5MS0xLjU1MiAzLjI5Ny0xLjIzIDMuMjk3LTEuMjMuNjUzIDEuNjUzLjI0MiAyLjg3NC4xMTggMy4xNzYuNzcuODQgMS4yMzUgMS45MTEgMS4yMzUgMy4yMjEgMCA0LjYwOS0yLjgwNyA1LjYyNC01LjQ3OSA1LjkyMS40My4zNzIuODIzIDEuMTAyLjgyMyAyLjIyMnYzLjI5M2MwIC4zMTkuMTkyLjY5NC44MDEuNTc2IDQuNzY1LTEuNTg5IDguMTk5LTYuMDg2IDguMTk5LTExLjM4NiAwLTYuNjI3LTUuMzczLTEyLTEyLTEyeiIvPjwvc3ZnPg=="></a></p>
+		<div id="subwallet_form_main"> 
+			<div id="subwallet_form"></div>
+			<div id="sub_qrcode"> </div>
+		</div>
 		</div>		
-	
 	</div>
 
 	<div id="wallet">
@@ -17,30 +30,24 @@
 		<div id="qrcodes">
 			<div id="qrcode"></div>
 		</div>
+		
 		<p id="address"></p>
-		<p id="address2"></p>
 		<p id="mnemonic"></p>
 
-		<div id="subwallet_form_main"> 
-			<div id="subwallet_form"></div>
-			<div id="sub_qrcode"> </div>
-		</div>
 		
 	</div>
 </main>
 
 <script type="module">
-
-	import { Lucid } from "./lucid/dist/web/mod.js"
-	let generatebutton = document.getElementById("generatebutton");
-	let subwallet = document.getElementById("subwallet_form");
-	generatebutton.onclick = async function() {
+import { Lucid } from "./lucid/dist/web/mod.js"
+let generatebutton = document.getElementById("generatebutton");
+let subwallet = document.getElementById("subwallet_form");
+generatebutton.onclick = async function() {
     document.getElementById("disclaimer").innerHTML = "";
     document.getElementById("subwallet_form").innerHTML = "";
     document.getElementById("sub_qrcode").innerHTML = "";
-	subwallet.innerHTML = "";
+    subwallet.innerHTML = "";
 
-    
     var lucid = await Lucid.new();
     var mnemonic = lucid.utils.generateSeedPhrase();
     document.getElementById("mnemonic").innerHTML = "Mnemonics : <br />" + mnemonic;
@@ -50,21 +57,21 @@
     document.getElementById("address").innerHTML = address;
     document.getElementById("qrcode").innerHTML = "";
     var qrcode = new QRCode("qrcode", address);
-	
-	//subwallet button generation
-	let subwallet_buttton = document.createElement('button');
-	subwallet_buttton.innerHTML='generate a derivated wallet';
-	subwallet_buttton.setAttribute('accountIndex', 0);
-	subwallet_buttton.onclick = async function(){
-		this.setAttribute('accountIndex', parseInt(this.getAttribute('accountIndex')) + 1);
-		let lucid = await Lucid.new();
-		let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Base", accountIndex: parseInt(this.getAttribute('accountIndex')) }).wallet;	
-		let div_qr = document.createElement('div');
-		div_qr.setAttribute('id', "Base_qr_"+this.getAttribute('accountIndex'));		
-		document.getElementById('sub_qrcode').appendChild(div_qr);
-		console.log( await wallet.address());
-		new QRCode(div_qr.getAttribute('id'), await wallet.address());			
-	}
+    
+    let numberofaccounts = document.getElementById("numberofaccounts").value;
+    if (numberofaccounts > 1) {
+        let p = document.getElementById('address');
+        let textarea = document.createElement('textarea')
+        p.parentNode.replaceChild(textarea,p);
+        textarea.setAttribute("rows", "10", "cols", "200");
+        for (let i = 0; i < numberofaccounts; i++) {
+            let lucid = await Lucid.new();
+            let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Base", accountIndex: parseInt(i) }).wallet;
+            console.log( await wallet.address());	
+            textarea.innerHTML += await wallet.address() + "\n";
+    }}
+    
+    
 
 	//sub wallet entreprise generation
 	let subwallet_buttton_entreprise = document.createElement('button');
@@ -81,24 +88,25 @@
 		new QRCode(div_qr.getAttribute('id'), await wallet.address());	
 	}	
 	
-	subwallet.appendChild(subwallet_buttton);
 	subwallet.appendChild(subwallet_buttton_entreprise);
 	
 
 };
 </script>
 <style>
-#form {width:20%; float:left;margin-top:25%;margin-left:3%;border-radius:15px; background:white;padding:20px;} 
+#form {width:20%; float:left;margin-top:25%;margin-left:3%;border-radius:15px; background:white;padding:20px;text-align:center;} 
 #qrcode img { margin:auto; }
 #form, #wallet {box-shadow:0px 0px 30px 0px grey;}
-#wallet {margin-top:30px; margin:auto;background-color:white;border-radius:15px; padding : 30px; max-width:300px;  word-wrap : break-word; z-index:1000;}
+#wallet {margin-top:130px; float:right;;background-color:white;border-radius:15px; padding : 30px; max-width:900px;  word-wrap : break-word; z-index:1000;}
 #mnemonic { border-top: 1px solid grey; }
-#cardanologo { display:bloc; width:300px; float:right; margin-right:10%;z-index:1;margin-top:25%;}
+#cardanologo { display:none; width:300px; float:right; margin-right:10%;z-index:1;margin-top:25%;}
 body { height:100vh;  background: rgb(244,253,255);
 background: radial-gradient(circle, rgba(244,253,255,1) 0%, rgba(222,243,255,1) 50%, rgba(197,224,255,1) 100%); }
 #links { text-align:center;}
-#generatebutton {width: 80%;
-height: 30px;margin: auto;  margin-top: auto;display: block;margin-top: 15px;}
+#generatebutton {width: 80%; height: 30px;margin: auto;  margin-top: auto;display: block;margin-top: 15px;z-index:100;position:relative;}
+#advancedoptions {  height:0px; opacity:0; transition: all 1s ease;z-index:2;position:relative;}
+#chck1:checked ~ #advancedoptions { opacity:1;height:auto; }
+textarea { width:80%; margin:auto; }
 </style>
 </body>
 </html>
