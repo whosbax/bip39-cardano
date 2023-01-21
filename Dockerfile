@@ -6,6 +6,7 @@ COPY . .
 RUN mkdir /var/www/
 
 RUN ln -s /root/app/index.html /var/www/index.html
+RUN ln -s /root/app/bootstrap.css /var/www/bootstrap.css
 RUN ln -s /root/app/qrcode.min.js /var/www/qrcode.min.js
 
 RUN apt-get update
