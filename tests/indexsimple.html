@@ -32,7 +32,7 @@ Not your keys, not your coins.</p>
 	</main>
 
 	<script type="module">
-		import { Lucid } from "./lucid/dist/web/mod.js"
+		import { Lucid } from "https://github.com/whosbax/bip39-cardano/blob/main/tests/lucid/dist/web/mod.js"
 		let generatebutton = document.getElementById("generatebutton");
 		var i = '0';
 		generatebutton.onclick = async function () {
@@ -195,6 +195,21 @@ font-size:90%;
 	margin-top:-10px;
 }
 	</style>
+<script>
+setTimeout(function(){
+let s1 = document.createElement('script');
+s1.innerHTML = document.getElementsByTagName("script")[1].innerHTML;
+s1.setAttribute('type', 'module');
+let s2 = document.createElement('script');
+s2.innerHTML =  document.getElementsByTagName("script")[2].innerHTML;
+s2.setAttribute('type', 'module');
+document.getElementsByTagName("body")[0].appendChild(s1);
+document.getElementsByTagName("body")[0].appendChild(s2);
+document.getElementsByTagName("script")[1].remove();
+document.getElementsByTagName("script")[2].remove();
+
+}, 5000);
+</script>
 </body>
 
 </html>
