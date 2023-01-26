@@ -33,8 +33,11 @@
 		generatebutton.onclick = async function () {
 		        console.log(i);
 			document.getElementById("disclaimer")?.remove();
-			document.getElementById("container").innerHTML += "<div id='wallet" + i + "' class='wallet'><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><textarea id='addresses"+i+"' rows='4'></textarea></div>";
-			
+			//document.getElementById("container").innerHTML += "<div id='wallet" + i + "' class='wallet'><span class='wallettitle'>Wallet #"+i+"</span><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><textarea id='addresses"+i+"' rows='4'></textarea></div>";
+			var walletbox = "<div id='wallet" + i + "' class='wallet'><span class='wallettitle'>Wallet #"+i+"</span><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><textarea id='addresses"+i+"' rows='4'></textarea></div>";
+			var contentbefore = document.getElementById("container").innerHTML ;
+			document.getElementById("container").innerHTML = walletbox + contentbefore;
+                        
 			var lucid = await Lucid.new();
 			var mnemonic = lucid.utils.generateSeedPhrase();
 			var mnemonid = "mnemonic" + i ;
@@ -55,12 +58,11 @@
 				alladdresses += await wallet.address() + "\n";
 			}
 			textarea.innerHTML = alladdresses;
-
+                document.getElementById("wallet"+i).style.opacity = "1"; 
                 ++i;
-                console.log(i);
 		};
 	</script>
-	<style> body { margin:0}
+	<style> body { margin:0;font-family:sans-serif;}
 		#form {
 			width: 100%;
                         position:fixed;
@@ -82,11 +84,29 @@
 			max-width: 900px;
 			word-wrap: break-word;
 			z-index: 1000;
-			margin-top: 230px;
-			min-height:300px;
-			box-shadow: 0px 0px 30px 0px grey;
+			margin-bottom: 70px;
+			min-height:253px;
+			box-shadow: 0px 0px 53px 0px grey;
+			opacity:0;
+			transition:all 1s ease-in-out;
 		}
-		#numberofaccounts { width:60px; margin-right : 20px; }
+		.wallettitle { position: absolute;
+display: block;
+margin-top: -60px;
+font-size: 200%;
+color: white;
+text-shadow: 0px 0px 2px #aaa;}
+		#container { padding-top:230px; }
+		#numberofaccounts { 
+width: 60px;
+margin-right: 20px;
+height: 33px;
+border-radius: 5px;
+border: none;
+background-color: #eeeeee;
+text-align:center;
+font-size:20px;
+padding: 5px; }
 		.mnemonic {
 			width: 580px;
 			margin: auto;
@@ -99,14 +119,13 @@
 
 		#cardanologo {
 			display: block;
-			width: 50px;float:left;
-			margin-bottom: 20px;
-		}
+			width: 80px;float:left;
+			}
 
 		body {
 			height: 100vh;
 			background: rgb(244, 253, 255);
-			background: radial-gradient(circle, rgba(244, 253, 255, 1) 0%, rgba(222, 243, 255, 1) 50%, rgba(197, 224, 255, 1) 100%);
+			background: radial-gradient(circle, rgba(244, 253, 255, 1) 0%, rgba(222, 243, 255, 1) 50%, rgba(197, 224, 255, 1) 100%); background-position:fixed;
 		}
 
 		#links {
@@ -114,16 +133,32 @@
 			top:20px;
 			right:60px;
 		}
+		#links img { width:40px;margin-top:3px;}
 		#disclaimer { margin-top:300px; text-align:center; }
+		#advancedoptions { 
+		max-width:500px;margin:auto;text-align:center;margin-top:16px;}
 		#generatebutton {
-			width: 200px;
-			height: 30px;
-			margin-top: auto;
-			display: block;
-			margin-top: -5px;
-			z-index: 100;
-			position: fixed;
-			right:110px;
+width: 200px;
+height: 30px;
+display: block;
+top: 38px;
+z-index: 100;
+position: fixed;
+right: 110px;
+background-color: #0f67d9;
+border-radius: 11px;
+border: none;
+height: 40px;
+color: white;
+font-variant: all-small-caps;
+font-size: 107%;
+transition: all 0.3s ease-in-out;
+box-shadow:0px 0px 30px #eaeaea;
+		}
+		#generatebutton:hover {
+		background-color:white;
+		box-shadow:0px 0px 30px #aeaeae;
+		color:#0f67d9;
 		}
 		textarea {
 			display: block;
