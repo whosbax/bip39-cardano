@@ -15,15 +15,15 @@
 				</div>
 				<button id="generatebutton"><b>generate new wallet</b></button>
 				
-				<p id="links"><a href="#"><img
+				<p id="links"><a href="https://github.com/whosbax/bip39-cardano"><img
 							src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMiAwIDUuMzAyIDMuNDM4IDkuOCA4LjIwNyAxMS4zODcuNTk5LjExMS43OTMtLjI2MS43OTMtLjU3N3YtMi4yMzRjLTMuMzM4LjcyNi00LjAzMy0xLjQxNi00LjAzMy0xLjQxNi0uNTQ2LTEuMzg3LTEuMzMzLTEuNzU2LTEuMzMzLTEuNzU2LTEuMDg5LS43NDUuMDgzLS43MjkuMDgzLS43MjkgMS4yMDUuMDg0IDEuODM5IDEuMjM3IDEuODM5IDEuMjM3IDEuMDcgMS44MzQgMi44MDcgMS4zMDQgMy40OTIuOTk3LjEwNy0uNzc1LjQxOC0xLjMwNS43NjItMS42MDQtMi42NjUtLjMwNS01LjQ2Ny0xLjMzNC01LjQ2Ny01LjkzMSAwLTEuMzExLjQ2OS0yLjM4MSAxLjIzNi0zLjIyMS0uMTI0LS4zMDMtLjUzNS0xLjUyNC4xMTctMy4xNzYgMCAwIDEuMDA4LS4zMjIgMy4zMDEgMS4yMy45NTctLjI2NiAxLjk4My0uMzk5IDMuMDAzLS40MDQgMS4wMi4wMDUgMi4wNDcuMTM4IDMuMDA2LjQwNCAyLjI5MS0xLjU1MiAzLjI5Ny0xLjIzIDMuMjk3LTEuMjMuNjUzIDEuNjUzLjI0MiAyLjg3NC4xMTggMy4xNzYuNzcuODQgMS4yMzUgMS45MTEgMS4yMzUgMy4yMjEgMCA0LjYwOS0yLjgwNyA1LjYyNC01LjQ3OSA1LjkyMS40My4zNzIuODIzIDEuMTAyLjgyMyAyLjIyMnYzLjI5M2MwIC4zMTkuMTkyLjY5NC44MDEuNTc2IDQuNzY1LTEuNTg5IDguMTk5LTYuMDg2IDguMTk5LTExLjM4NiAwLTYuNjI3LTUuMzczLTEyLTEyLTEyeiIvPjwvc3ZnPg=="></a>
 				</p>
 			</div>
 		</div>
 		<div id="disclaimer"><h2>Dislaimer : no garantee</h2><p>
 		For maximum security, you should run this code offline.<br />
-Don't want to trust? Check it out.<br />
-Build with <a href="https://github.com/spacebudz/lucid">lucid</a>.</p>
+Don't want to trust? <a href="https://github.com/whosbax/bip39-cardano">Verify</a>.<br />
+<span style="font-size:90%;">Build with <a href="https://github.com/spacebudz/lucid">lucid</a>.</span></p>
 </div>
 		<div id="container">
 		    
@@ -107,10 +107,9 @@ Build with <a href="https://github.com/spacebudz/lucid">lucid</a>.</p>
 		transition: all 1s ease-in-out;}
 		.wallettitle { position: absolute;
 display: block;
-margin-top: -60px;
+margin-top: -59px;
 font-size: 200%;
-color: white;
-text-shadow: 0px 0px 2px #aaa;}
+color: white;}
 		#numberofaccounts { 
 width: 60px;
 margin-right: 20px;
@@ -150,19 +149,20 @@ padding: 5px; }
 		#links img { width:40px;margin-top:3px;}
 		#disclaimer { margin-top:300px; text-align:center; }
 		#advancedoptions { 
-		max-width:500px;margin:auto;text-align:center;margin-top:16px;}
+		max-width:500px;margin:auto;text-align:center;margin-top:16px;
+		font-size:110%;}
 		#generatebutton {
-width: 200px;
+width: 250px;
 height: 30px;
 display: block;
-top: 38px;
+top: 33px;
 z-index: 100;
 position: fixed;
 right: 110px;
 background-color: #0f67d9;
 border-radius: 11px;
 border: none;
-height: 40px;
+height: 50px;
 color: white;
 font-variant: all-small-caps;
 font-size: 107%;
@@ -174,6 +174,8 @@ box-shadow:0px 0px 30px #eaeaea;
 		box-shadow:0px 0px 30px #aeaeae;
 		color:#0f67d9;
 		}
+		#generatebutton:active {
+		border:3px solid #0f57d9;}
 		textarea {
 			display: block;
 			width: 610px;
