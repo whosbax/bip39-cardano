@@ -20,7 +20,11 @@
 				</p>
 			</div>
 		</div>
-		<p id="disclaimer">Dislaimer : no garantee</p>
+		<div id="disclaimer"><h2>Dislaimer : no garantee</h2><p>
+		For maximum security, you should run this code offline.<br />
+Don't want to trust? Check it out.<br />
+Build with <a href="https://github.com/spacebudz/lucid">lucid</a>.</p>
+</div>
 		<div id="container">
 		    
 		</div>
@@ -33,32 +37,34 @@
 		generatebutton.onclick = async function () {
 		        console.log(i);
 			document.getElementById("disclaimer")?.remove();
-			//document.getElementById("container").innerHTML += "<div id='wallet" + i + "' class='wallet'><span class='wallettitle'>Wallet #"+i+"</span><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><textarea id='addresses"+i+"' rows='4'></textarea></div>";
-			var walletbox = "<div id='wallet" + i + "' class='wallet'><span class='wallettitle'>Wallet #"+i+"</span><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><textarea id='addresses"+i+"' rows='4'></textarea></div>";
+			let numberofaccounts = document.getElementById("numberofaccounts").value;
+			var walletbox = "<div id='wallet" + i + "' class='wallet'><span class='wallettitle'>Wallet #"+i+"</span><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><span class='accountnumber'>"+numberofaccounts+" account"+(numberofaccounts>1?"s":"")+":</span><textarea id='addresses"+i+"' rows='4'></textarea></div>";
 			var contentbefore = document.getElementById("container").innerHTML ;
-			document.getElementById("container").innerHTML = walletbox + contentbefore;
-                        
 			var lucid = await Lucid.new();
 			var mnemonic = lucid.utils.generateSeedPhrase();
 			var mnemonid = "mnemonic" + i ;
-			console.log(mnemonid);
-			document.getElementById(mnemonid).innerHTML = "Mnemonics : <br />" + mnemonic;
+			var walletid = "wallet" + i;
 			lucid.selectWalletFromSeed(mnemonic, "base", 3);
 			var address = await lucid.wallet.address();
 			var qrid = "qrcode"+i;
-			document.getElementById(qrid).innerHTML = "";
-			var qrcode = new QRCode(qrid, address);
-			let textarea = document.getElementById('addresses'+i);
 			let alladdresses = "";
-			let numberofaccounts = document.getElementById("numberofaccounts").value;
 			for (let j = 0; j < numberofaccounts; j++) {
 				let lucid = await Lucid.new();
 				let wallet = await lucid.selectWalletFromSeed(mnemonic, { addressType: "Base", accountIndex: parseInt(j) }).wallet;
 				console.log(await wallet.address());
 				alladdresses += await wallet.address() + "\n";
 			}
+			document.getElementById("container").innerHTML = walletbox + contentbefore;
+			let textarea = document.getElementById('addresses'+i);
+			document.getElementById(mnemonid).innerHTML = "<span class='titlemnemo'>Mnemonics :</span><br />" + mnemonic;
+			document.getElementById(qrid).innerHTML = "";
 			textarea.innerHTML = alladdresses;
-                document.getElementById("wallet"+i).style.opacity = "1"; 
+                        var qrcode = new QRCode(qrid, address);
+                document.getElementById(walletid).style.minHeight = "253px";
+                document.getElementById(walletid).style.opacity = "1"; 
+                document.getElementById(walletid).style.top = "200px";
+                var walletid = ".wallet *";
+                console.log(walletid)
                 ++i;
 		};
 	</script>
@@ -69,6 +75,7 @@
                         top:0;
 			background: white;
 			padding: 20px;
+			z-index:300;
 		}
 		
 		.qrcode img {
@@ -77,7 +84,9 @@
 			float:right;
 		}
 		.wallet {
+			position:relative;
 			margin:auto;
+			top:40px;
 			background-color: white;
 			border-radius: 15px;
 			padding: 30px;
@@ -85,18 +94,23 @@
 			word-wrap: break-word;
 			z-index: 1000;
 			margin-bottom: 70px;
-			min-height:253px;
-			box-shadow: 0px 0px 53px 0px grey;
+			--min-height:253px;
+			height:0px;
+			box-shadow: 0px 0px 53px 0px gray;
 			opacity:0;
 			transition:all 1s ease-in-out;
+			z-index:3;
 		}
+		div[id⁼"wallet"] * {
+		--opacity:0;
+		--height:0;
+		transition: all 1s ease-in-out;}
 		.wallettitle { position: absolute;
 display: block;
 margin-top: -60px;
 font-size: 200%;
 color: white;
 text-shadow: 0px 0px 2px #aaa;}
-		#container { padding-top:230px; }
 		#numberofaccounts { 
 width: 60px;
 margin-right: 20px;
@@ -116,7 +130,7 @@ padding: 5px; }
 			float:left;
 			margin-bottom:30px;
 		}
-
+		#container { padding-bottom:200px;}
 		#cardanologo {
 			display: block;
 			width: 80px;float:left;
@@ -162,10 +176,23 @@ box-shadow:0px 0px 30px #eaeaea;
 		}
 		textarea {
 			display: block;
-			width: 600px;
-			margin: auto;
+			width: 610px;
 			margin-top: 15px;
+			height:100px;
 		}
+		.accountnumber {display: block;
+height: 30px;
+width: 120px;
+position: absolute;
+margin-top: 128px;
+color:grey;
+font-size:90%;
+}
+.titlemnemo {
+	display:block;
+	text-align:center;
+	margin-top:-10px;
+}
 	</style>
 </body>
 
