@@ -33,11 +33,11 @@ Not your keys, not your coins.</p>
 
 	<script type="module">
 		//import { Lucid } from "./lucid/dist/web/mod.js"
-		import { Lucid } from "https://unpkg.com/lucid-cardano/web/mod.js"
+		import { Lucid } from "https://github.com/whosbax/bip39-cardano/blob/main/tests/lucid/dist/web/mod.js"
+		//import { Lucid } from "https://unpkg.com/lucid-cardano/web/mod.js"
 		let generatebutton = document.getElementById("generatebutton");
 		var i = '0';
 		generatebutton.onclick = async function () {
-		        console.log(i);
 			document.getElementById("disclaimer")?.remove();
 			let numberofaccounts = document.getElementById("numberofaccounts").value;
 			var walletbox = "<div id='wallet" + i + "' class='wallet'><span class='wallettitle'>Wallet #"+i+"</span><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><span class='accountnumber'>"+numberofaccounts+" account"+(numberofaccounts>1?"s":"")+":</span><textarea id='addresses"+i+"' rows='4'></textarea></div>";
@@ -66,7 +66,6 @@ Not your keys, not your coins.</p>
                 document.getElementById(walletid).style.opacity = "1"; 
                 document.getElementById(walletid).style.top = "200px";
                 var walletid = ".wallet *";
-                console.log(walletid)
                 ++i;
 		};
 	</script>
