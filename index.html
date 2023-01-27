@@ -20,8 +20,8 @@
 				</p>
 			</div>
 		</div>
-		<div id="disclaimer"><h2>Dislaimer : no garantee</h2><p>
-		For maximum security, you should run this code offline.<br />
+		<div id="disclaimer"><h2>Dislaimer :</h2><p>
+		For maximum security, you should run this code offline and should have some basic knowledge about cyber risk and data management.<br />
 Don't want to trust? <a href="https://github.com/whosbax/bip39-cardano">Verify</a>.<br />
 <span style="font-size:90%;">Build with <a href="https://github.com/spacebudz/lucid">lucid</a>, by the community.</span><br /><br />
 Not your keys, not your coins.</p>
@@ -73,6 +73,7 @@ Not your keys, not your coins.</p>
                         position:fixed;
                         top:0;
 			background: white;
+			border-bottom:1px solid #eaeaea;
 			padding: 20px;
 			z-index:300;
 		}
@@ -146,7 +147,7 @@ padding: 5px; }
 			right:60px;
 		}
 		#links img { width:40px;margin-top:3px;}
-		#disclaimer { margin-top:300px; text-align:center; }
+		#disclaimer { margin-top:300px; text-align:center; padding-left:20%;padding-right:20%; }
 		#advancedoptions { 
 		max-width:500px;margin:auto;text-align:center;margin-top:16px;
 		font-size:110%;}
@@ -200,7 +201,8 @@ font-size:90%;
 	margin-bottom:20px;right:0;}
 	#advancedoptions {margin-top:-64px;}
 	.wallet { height:auto}
-	.qrcode img { max-width:200px;}
+	.qrcode img { max-width:33%; float:right;}
+	.mnemonic, textarea {width:60%;} 
 }
 @media (max-width:700px) {
         #advancedoptions { margin-top:16px;}
