@@ -23,7 +23,7 @@
 		<div id="disclaimer"><h2>Dislaimer : no garantee</h2><p>
 		For maximum security, you should run this code offline.<br />
 Don't want to trust? <a href="https://github.com/whosbax/bip39-cardano">Verify</a>.<br />
-<span style="font-size:90%;">Build with <a href="https://github.com/spacebudz/lucid">lucid</a>.</span><br /><br />
+<span style="font-size:90%;">Build with <a href="https://github.com/spacebudz/lucid">lucid</a>, by the community.</span><br /><br />
 Not your keys, not your coins.</p>
 </div>
 		<div id="container">
@@ -193,6 +193,17 @@ font-size:90%;
 	display:block;
 	text-align:center;
 	margin-top:-10px;
+}
+@media (max-width: 1200px){
+	#cardanologo { float:none; }
+	#generatebutton {position:relative;margin:auto;
+	margin-bottom:20px;right:0;}
+	#advancedoptions {margin-top:-64px;}
+	.wallet { height:auto}
+	.qrcode img { max-width:200px;}
+}
+@media (max-width:700px) {
+        #advancedoptions { margin-top:16px;}
 }
 	</style>
 
