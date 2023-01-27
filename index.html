@@ -37,7 +37,7 @@ Not your keys, not your coins.</p>
 		generatebutton.onclick = async function () {
 			document.getElementById("disclaimer")?.remove();
 			let numberofaccounts = document.getElementById("numberofaccounts").value;
-			var walletbox = "<div id='wallet" + i + "' class='wallet'><span class='wallettitle'>Wallet #"+i+"</span><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><span class='accountnumber'>"+numberofaccounts+" account"+(numberofaccounts>1?"s":"")+":</span><textarea id='addresses"+i+"' rows='4'></textarea></div>";
+			var walletbox = "<div id='wallet" + i + "' class='wallet'><span class='wallettitle'>Wallet #"+i+"</span><span class='accountnumber'>"+numberofaccounts+" account"+(numberofaccounts>1?"s":"")+"</span><div class='meta'><div id='qrcode"+i+"' class='qrcode'></div></div><p id='mnemonic"+i+"' class='mnemonic'></p><textarea id='addresses"+i+"' rows='4'></textarea></div>";
 			var contentbefore = document.getElementById("container").innerHTML ;
 			var lucid = await Lucid.new();
 			var mnemonic = lucid.utils.generateSeedPhrase();
@@ -59,7 +59,7 @@ Not your keys, not your coins.</p>
 			document.getElementById(qrid).innerHTML = "";
 			textarea.innerHTML = alladdresses;
                         var qrcode = new QRCode(qrid, address);
-                document.getElementById(walletid).style.minHeight = "253px";
+                document.getElementById(walletid).style.minHeight = "260px";
                 document.getElementById(walletid).style.opacity = "1"; 
                 document.getElementById(walletid).style.top = "200px";
                 var walletid = ".wallet *";
@@ -135,6 +135,7 @@ Not your keys, not your coins.</p>
      border-radius: 15px;
      float:left;
      margin-bottom:30px;
+     text-align:justify;
 }
  #container {
      padding-bottom:200px;
@@ -209,7 +210,7 @@ Not your keys, not your coins.</p>
      height: 30px;
      width: 120px;
      position: absolute;
-     margin-top: 128px;
+     bottom: -7px;
      color:grey;
      font-size:90%;
 }
@@ -217,8 +218,17 @@ Not your keys, not your coins.</p>
      display:block;
      text-align:center;
      margin-top:-10px;
+     font-weight:bold;
 }
- @media (max-width: 860px){
+ @media (max-width: 954px){
+     .wallet {
+         height:auto
+    }
+     .mnemonic, textarea {
+        width:60%;
+    }
+}
+@media (max-width: 860px){
      #form {
          flex-wrap:wrap;
     }
@@ -229,17 +239,8 @@ Not your keys, not your coins.</p>
         margin-right:110px;
         margin-top:20px;
     }
-}
- @media (max-width: 954px){
-     .qrcode img {
-         max-width:32%;
-    }
-     .wallet {
-         height:auto
-    }
-     .mnemonic, textarea {
-        width:55%;
-    }
+    .qrcode img { float:none;min-width:256px!important; margin:auto;margin-bottom:20px; }
+    .mnemonic, textarea { margin:auto; width:90%; float:none;margin-bottom:10px; }
 }
 	</style>
 
