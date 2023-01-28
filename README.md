@@ -1,6 +1,12 @@
 # bip39-cardano
-```bash
-./run.sh
+This project goal is to provide easy and simple paper wallet offline for Cardano.
+Preview here : https://whosbax.github.io/bip39-cardano/
 ```
-##### TRY
-```http://127.0.0.1/```
+git clone https://github.com/whosbax/bip39-cardano
+cd bip39-cardano 
+python3 -m http.server 80
+```
+Then, browse on http://127.0.0.1/
+
+# Built with
+Lucid : https://github.com/spacebudz/lucid
